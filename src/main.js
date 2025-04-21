@@ -12,6 +12,7 @@ class GameScene extends Phaser.Scene {
     this.cursor
     this.playerSpeed = speedDown + 50
     this.target
+    this.points = 0
   }
   preload() {
     this.load.image("bg", "/assets/bg.png")
@@ -52,6 +53,11 @@ class GameScene extends Phaser.Scene {
   }
   getRandomX(){
     return Math.floor(Math.random() * 480)
+  }
+  targetHit(){
+    this.target.setY(0);
+    this.target.setX(this.getRandomX());
+    this.points ++;
   }
 }
 const config = {
