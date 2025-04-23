@@ -5,6 +5,12 @@ const sizes = {
   height: 500
 }
 const speedDown = 150
+
+const gameStartDiv = document.querySelector("#gameStartDiv")
+const gameStartBtn = document.querySelector("#gameStartBtn")
+const gameEndDiv = document.querySelector("#gameEndDiv")
+const gameWinLoseSpan = document.querySelector("#gameWinLoseSpan")
+const gameEndScoreSpan = document.querySelector("#gameEndScoreSpan")
 class GameScene extends Phaser.Scene {
   constructor() {
     super("scene-game")
@@ -118,3 +124,8 @@ const config = {
 
 
 const game = new Phaser.Game(config)
+
+gameStartBtn.addEventListener("click",() =>{
+  gameStartDiv.style.display="none"
+  game.scene.resume("scene-game")
+})
