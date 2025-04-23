@@ -46,6 +46,11 @@ class GameScene extends Phaser.Scene {
       font: "25px Arial",
       fill: "#000000",
     })
+    this.textTime = this.add.text(10,10, "Reaming Time: 00",{
+      font: "25px Arial",
+      fill: "#000000"
+    })
+    this.timedEvent = this.time.delayedCall(3000, this.gameOver,[],this)
   }
   update() {
     if (this.target.y >= sizes.height) {
