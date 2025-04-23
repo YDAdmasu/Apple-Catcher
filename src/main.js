@@ -4,7 +4,7 @@ const sizes = {
   width: 500,
   height: 500
 }
-const speedDown = 300
+const speedDown = 150
 class GameScene extends Phaser.Scene {
   constructor() {
     super("scene-game")
@@ -14,6 +14,9 @@ class GameScene extends Phaser.Scene {
     this.target
     this.points = 0
     this.textScore
+    this.textTime
+    this.timedEvent
+    this.remainingTime
   }
   preload() {
     this.load.image("bg", "/assets/bg.png")
@@ -68,6 +71,9 @@ class GameScene extends Phaser.Scene {
     this.target.setX(this.getRandomX());
     this.points ++;
     this.textScore.setText(`Score: ${this.points}`)
+  }
+  gameOver(){
+    console.log('Game Over')
   }
 }
 const config = {
