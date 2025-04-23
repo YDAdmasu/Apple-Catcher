@@ -4,7 +4,7 @@ const sizes = {
   width: 500,
   height: 500
 }
-const speedDown = 150
+const speedDown = 300
 
 const gameStartDiv = document.querySelector("#gameStartDiv")
 const gameStartBtn = document.querySelector("#gameStartBtn")
@@ -31,10 +31,11 @@ class GameScene extends Phaser.Scene {
     this.load.image("bg", "/assets/bg.png")
     this.load.image("basket", "/assets/basket.png")
     this.load.image("apple", "/assets/apple.png")
-    this.load.audio("coin" ," /assets/coin.mp3")
-    this.load.audio("bgMusic" , "/assets/bgMusic.mp3")
+    this.load.audio("coin" ,"/assets/coin.mp3")
+    this.load.audio("bgMusic" ,"/assets/bgMusic.mp3")
   }
   create() {
+    this.scene.pause("scene-game")
     this.coinMusic = this.sound.add("coin")
     this.bgMusic = this.sound.add("bgMusic")
     this.bgMusic.play()
@@ -64,7 +65,7 @@ class GameScene extends Phaser.Scene {
       font: "25px Arial",
       fill: "#000000"
     })
-    this.timedEvent = this.time.delayedCall(3000, this.gameOver,[],this)
+    this.timedEvent = this.time.delayedCall(30000,this.gameOver,[],this)
     this.emitter =this.add.particles(0,0,"money",{
       speed: 100,
       gravityY:speedDown - 200,
@@ -104,7 +105,15 @@ class GameScene extends Phaser.Scene {
     this.textScore.setText(`Score: ${this.points}`)
   }
   gameOver(){
-    console.log('Game Over')
+    this.sys.game.destroy(true)
+    if(this.points >= 10){
+      gameEndScoreSpan.textContent = this.points
+      gameWinLoseSpan.textContent ="Win! 😊"
+    }else{
+      gameEndScoreSpan.textContent = this.points
+      gameWinLoseSpan.textContent ="Lose! 😥"
+    }
+    gameEndDiv.style.display="flex"
   }
 }
 const config = {
